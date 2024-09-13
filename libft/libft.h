@@ -21,7 +21,17 @@ typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
-}	t_list;
+}				t_list;
+
+typedef struct s_lst_g
+{
+	char			*content;
+	struct s_lst_g	*next;
+}				t_lst_g;
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
 
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
@@ -68,5 +78,16 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+/*get_next_line*/
+char	*get_next_line(int fd);
+int		found_newline(t_lst_g	*list);
+int		len_to_newline(t_lst_g *list);
+void	cpystr_upto_newline(t_lst_g	*list, char *line_str);
+t_lst_g	*find_last_node(t_lst_g *list);
+void	dealloc(t_lst_g	*saved_node, t_lst_g	**ptr_list, char *saved_str);
+void	polish_list(t_lst_g	**ptr_list);
+void	add_to_list(t_lst_g **ptr_list, char *buf, int fd);
+int		create_list(t_lst_g	**ptr_list, int fd);
+char	*get_line(t_lst_g *list);
 
 #endif
